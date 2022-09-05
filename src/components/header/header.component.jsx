@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+      <Navbar style={{backgroundColor :'#f0eddc'}} variant='light' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>Otaku Fortress</Navbar.Brand>

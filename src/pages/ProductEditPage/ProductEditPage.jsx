@@ -9,7 +9,7 @@ import { productDetails } from '../../redux/reducers/productdetails/productdetai
 import { updateProduct } from '../../redux/reducers/product/product.actions';
 import ProductActionTypes from '../../redux/reducers/product/product.types';
 import Swal from 'sweetalert2';
-import Product from '../ProductEditPage/Product.svg';
+import Product from '../ProductEditPage/Product.jpg';
 
 const ProductEditPage = ({ match, history }) => {
   const productId = match.params.id;
