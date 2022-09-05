@@ -24,14 +24,6 @@ const ProductAddPage = ({ match, history }) => {
   const [description, setDescription] = useState('');
   const [uploading, setUploading] = useState(false);
 
-// setName(null);
-// setPrice(null);
-// setImage(null);
-// setBrand(null);
-// setCategory(null);
-// setCountInStock(null);
-// setDescription(null);
-
   const dispatch = useDispatch();
 
   const productDetail = useSelector((state) => state.productDetail);
@@ -44,15 +36,13 @@ const ProductAddPage = ({ match, history }) => {
     success: successUpdate,
   } = productUpdate;
 
-    
-
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: ProductActionTypes.PRODUCT_UPDATE_RESET });
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Updated Successfully!',
+        title: 'Added Successfully!',
         showConfirmButton: false,
         timer: 1000,
       });
@@ -61,13 +51,7 @@ const ProductAddPage = ({ match, history }) => {
       if (!product.name || product._id !== productId) {
         dispatch(productDetails(productId));
       } else {
-        setName(product.name);
-        setPrice(product.price);
-        setImage(product.image);
         setBrand(product.brand);
-        setCategory(product.category);
-        setCountInStock(product.countInStock);
-        setDescription(product.description);
       }
     }
   }, [dispatch, product, productId, history, successUpdate]);
@@ -194,7 +178,7 @@ const ProductAddPage = ({ match, history }) => {
                   onSelect={handleSelect}
                     >
                     <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        Category
+                    Category
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item eventKey="Cactus">Cactus</Dropdown.Item>

@@ -114,7 +114,6 @@ const ProductsListPage = ({ history, match }) => {
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
-                <th>BRAND</th>
                 <th></th>
               </tr>
             </thead>
@@ -125,7 +124,6 @@ const ProductsListPage = ({ history, match }) => {
                   <td>{product.name}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
@@ -133,11 +131,11 @@ const ProductsListPage = ({ history, match }) => {
                       </Button>
                     </LinkContainer>
                     <Button
-                      variant='danger'
+                      variant='light'
                       className='btn-sm'
                       onClick={() => deleteHandler(product._id)}
                     >
-                      <i className='fas fa-trash'></i>
+                      <i className='fas fa-trash' style={{color:"red"}}></i>
                     </Button>
                   </td>
                 </tr>
