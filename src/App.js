@@ -18,6 +18,7 @@ import UserListPage from './pages/UsersListPage/UsersListPage';
 import UserEditPage from './pages/UserEditPage/UserEditPage';
 import ProductsListPage from './pages/ProductsListPage/ProductsListPage';
 import ProductEditPage from './pages/ProductEditPage/ProductEditPage';
+import ProductAddPage from './pages/ProductAddPage/ProductAdd';
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
             exact
           />
           <Route path='/admin/product/:id/edit' component={ProductEditPage} />
+          <Route path='/admin/product/:id/add' component={ProductAddPage} />
           <Route path='/admin/orderlist' component={OrderListPage} />
           <Route path='/search/:keyword' component={HomePage} exact />
           <Route path='/page/:pageNumber' component={HomePage} exact />
