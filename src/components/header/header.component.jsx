@@ -22,7 +22,7 @@ const Header = () => {
       <Navbar style={{backgroundColor :'#f0eddc'}} variant='light' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>Otaku Fortress</Navbar.Brand>
+            <Navbar.Brand>Plantae</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
