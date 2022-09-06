@@ -3,8 +3,6 @@ import { Image , Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/reducers/user/user.actions';
-import SearchBox from '../searchbox/SearchBox';
-import { Route } from 'react-router-dom';
 import Logo from './logo.png';
 
 const Header = () => {
@@ -19,12 +17,13 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar style={{backgroundColor :'#2E8B57'}} variant='light' expand='lg' collapseOnSelect>
+      <Navbar style={{backgroundColor :'#2E8B57'}} variant='dark' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
             <Navbar.Brand>
               <Image
             src={Logo}
+            style={{ border: 'none' , width:'150px', height:'none'}}
             alt='Sign In Logo'/>
             </Navbar.Brand>
 

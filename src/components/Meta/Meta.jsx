@@ -12,9 +12,9 @@ const Meta = ({ title, description, keywords }) => {
 };
 
 Meta.defaultProps = {
-  title: 'Welcome To Otaku Fortress',
-  description: 'We sell Best Anime Items',
-  keywords: 'Anime,Posters,Figurine',
+  title: 'Welcome To Plantae e-plant Store',
+  description: 'We sell Best Indoor & Outdooe plants',
+  keywords: 'Floral Plants, Indoor Plants ,Outdoor Plants',
 };
 
 export default Meta;
