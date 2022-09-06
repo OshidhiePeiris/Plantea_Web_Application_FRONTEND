@@ -6,6 +6,8 @@ import { listProducts } from '../../redux/reducers/product/product.actions';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { Link } from 'react-router-dom';
+import SearchBox from '../../components/searchbox/SearchBox';
+import { Route } from 'react-router-dom';
 
 import Paginate from '../../components/Paginate/Paginate';
 import ProductCarousel from '../../components/ProductCarousal/ProductCarousal';
@@ -35,6 +37,10 @@ const HomePage = ({ match }) => {
         </Link>
       )}
       <h1>Latest Products</h1>
+      <Route 
+        render={({ history }) => <SearchBox history={history} />} 
+        style={{float : 'right'}}
+      />
       {loading ? (
         <Loader />
       ) : error ? (
