@@ -26,6 +26,7 @@ const Header = () => {
             style={{ border: 'none' , width:'150px', height:'none'}}
             alt='Sign In Logo'/>
             </Navbar.Brand>
+
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
