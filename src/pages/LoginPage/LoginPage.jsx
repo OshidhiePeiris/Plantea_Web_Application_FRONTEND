@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { login } from '../../redux/reducers/user/user.actions';
-import Login from './baka.png';
+import Login from './login.jpg';
 
 import VisibilityOffRoundedIcon from '@material-ui/icons/VisibilityOffRounded';
 import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';

@@ -9,7 +9,7 @@ import { productDetails } from '../../redux/reducers/productdetails/productdetai
 import { updateProduct } from '../../redux/reducers/product/product.actions';
 import ProductActionTypes from '../../redux/reducers/product/product.types';
 import Swal from 'sweetalert2';
-import Product from '../ProductEditPage/Product.svg';
+import Product from '../ProductAddPage/Product1.png';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const ProductAddPage = ({ match, history }) => {
@@ -213,7 +213,7 @@ const ProductAddPage = ({ match, history }) => {
               src={Product}
               alt='Product Logo'
               fluid
-              style={{ border: 'none' }}
+              style={{ border: 'none'}}
             ></Image>
           </Col>
         </Row>
