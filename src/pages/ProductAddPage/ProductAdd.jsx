@@ -147,12 +147,12 @@ const ProductAddPage = ({ match, history }) => {
 
                 <Form.Group controlId='image'>
                   <Form.Label>Image</Form.Label>
-                  <Form.Control
+                  {/* <Form.Control
                     type='text'
                     
                     placeholder='Enter Image URL'
                     onChange={(e) => setImage(e.target.value)}
-                  ></Form.Control>
+                  ></Form.Control> */}
                   <Form.File
                     id='image-file'
                     label='Choose File'
