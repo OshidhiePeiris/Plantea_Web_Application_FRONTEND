@@ -37,10 +37,12 @@ const HomePage = ({ match }) => {
         </Link>
       )}
       <h1>Latest Products</h1>
+      <div style={{marginLeft:'67%',marginTop:'-50px'}}>
       <Route 
-        render={({ history }) => <SearchBox history={history} />} 
+        render={({ history }) => <SearchBox  history={history} />} 
         style={{float : 'right'}}
       />
+      </div>
       {loading ? (
         <Loader />
       ) : error ? (

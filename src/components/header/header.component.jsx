@@ -23,7 +23,7 @@ const Header = () => {
             <Navbar.Brand>
               <Image
             src={Logo}
-            style={{ border: 'none' , width:'150px', height:'none'}}
+            style={{ border: 'none' , width:'150px', height:'auto'}}
             alt='Sign In Logo'/>
             </Navbar.Brand>
 
