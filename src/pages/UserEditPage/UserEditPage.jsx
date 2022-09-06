@@ -10,7 +10,7 @@ import {
 } from '../../redux/reducers/user/user.actions';
 import UserActionTypes from '../../redux/reducers/user/user.types';
 import Swal from 'sweetalert2';
-import Registration from '../RegistrationPage/Registration.png';
+import Registration from '../RegistrationPage/Registration.jpg';
 
 const UserEditPage = ({ match, history }) => {
   const userId = match.params.id;

@@ -213,7 +213,7 @@ const ProductEditPage = ({ match, history }) => {
               src={Product}
               alt='Product Logo'
               fluid
-              style={{ border: 'none' }}
+              style={{ border: 'none' , paddingTop : '200px'}}
             ></Image>
           </Col>
         </Row>
