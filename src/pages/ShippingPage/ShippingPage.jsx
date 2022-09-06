@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Registration from './Registration.png';
+import Registration from './Registration.jpg';
 import { saveShippingAddress } from '../../redux/reducers/cart/cart.actions';
 import CheckoutSteps from '../../components/checkoutsteps/CheckoutSteps';
 
