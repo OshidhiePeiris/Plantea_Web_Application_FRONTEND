@@ -6,6 +6,7 @@ import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { listOrders } from '../../redux/reducers/order/order.actions';
 
+
 const OrderListPage = ({ history }) => {
   const dispatch = useDispatch();
 
@@ -52,19 +53,17 @@ const OrderListPage = ({ history }) => {
                 <td>${order.totalPrice} </td>
 
                 <td>
-                  {order.isPaid ? (
-                    order.paidAt.substring(0, 10)
-                  ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }} />
-                  )}
+                <select style={{border: 'none'}} name="cars" id="cars">
+                  <option value="volvo">Yes</option>
+                  <option value="saab">No</option>
+                </select>
                 </td>
 
                 <td>
-                  {order.isDelivered ? (
-                    order.deliveredAt.substring(0, 10)
-                  ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }} />
-                  )}
+                <select style={{border: 'none'}} name="cars" id="cars">
+                  <option value="volvo">Yes</option>
+                  <option value="saab">No</option>
+                </select>
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
