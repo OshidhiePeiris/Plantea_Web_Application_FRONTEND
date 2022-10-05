@@ -10,6 +10,7 @@ import {
 } from '../../redux/reducers/user/user.actions';
 import UserActionTypes from '../../redux/reducers/user/user.types';
 import { listMyOrders } from '../../redux/reducers/order/order.actions';
+import { listProducts } from '../../redux/reducers/product/product.actions';
 
 const ProfilePage = ({ history }) => {
   const [name, setName] = useState('');
@@ -19,6 +20,9 @@ const ProfilePage = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
+
+  const productList = useSelector((state) => state.productList);
+  const {products} = productList;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -46,6 +50,10 @@ const ProfilePage = ({ history }) => {
       }
     }
   }, [dispatch, history, userInfo, user, success]);
+  useEffect(() => {
+    dispatch(listProducts());
+  }, [dispatch]);
+
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -167,7 +175,7 @@ const ProfilePage = ({ history }) => {
           </Table>
         )}
 
-        <h2>My Reviews</h2>
+        <h2>Reviews</h2>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
@@ -176,40 +184,37 @@ const ProfilePage = ({ history }) => {
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAl</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
-                <th></th>
+                <th>Product Name</th>
+                <th>Reviews</th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product.name}</td>
                   <td>
-                    {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}
-                  </td>
-                  <td>
-                    {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}
-                  </td>
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
-                      <Button variant='light '>Details</Button>
-                    </LinkContainer>
-                  </td>
-                </tr>
+                  <Table striped bordered hover responsive className='table-sm'>
+                    <thead>
+                      <tr>
+                        <th>User Name</th>
+                        <th>Rating</th>
+                        <th>Review</th>
+                      </tr>
+                    </thead>
+                    <tbody>           
+                      {product.reviews.map(review => (
+                        <tr key={review._id}>
+                        <td>{review.name}</td>
+                        <td>{review.rating}</td>
+                        <td>{review.comment}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table></td>
+        
+            
+            </tr>
+                
               ))}
             </tbody>
           </Table>
