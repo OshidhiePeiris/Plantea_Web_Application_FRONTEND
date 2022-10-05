@@ -20,10 +20,7 @@ const ProfilePage = ({ history }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
-
-  const productList = useSelector((state) => state.productList);
-  const {products} = productList;
-
+  
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -175,50 +172,11 @@ const ProfilePage = ({ history }) => {
           </Table>
         )}
 
-        <h2>Reviews</h2>
-        {loadingOrders ? (
-          <Loader />
-        ) : errorOrders ? (
-          <ErrorMessage variant='danger'>{errorOrders}</ErrorMessage>
-        ) : (
-          <Table striped bordered hover responsive className='table-sm'>
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Reviews</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product.name}</td>
-                  <td>
-                  <Table striped bordered hover responsive className='table-sm'>
-                    <thead>
-                      <tr>
-                        <th>User Name</th>
-                        <th>Rating</th>
-                        <th>Review</th>
-                      </tr>
-                    </thead>
-                    <tbody>           
-                      {product.reviews.map(review => (
-                        <tr key={review._id}>
-                        <td>{review.name}</td>
-                        <td>{review.rating}</td>
-                        <td>{review.comment}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </Table></td>
-        
-            
-            </tr>
-                
-              ))}
-            </tbody>
-          </Table>
-        )}
+            {userInfo && userInfo.isAdmin && (
+                <Button href='/adminprofile' type='submit' variant='primary'>
+                Reviews
+              </Button>
+              )}
       </Col>
     </Row>
   );

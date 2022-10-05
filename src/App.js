@@ -7,6 +7,7 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import CartPage from './pages/CartPage/CartPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import AdminProfilePage from './pages/ProfilePage/AdminProfile';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import ShippingPage from './pages/ShippingPage/ShippingPage';
@@ -33,6 +34,8 @@ const App = () => {
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegistrationPage} />
           <Route path='/profile' component={ProfilePage} />
+          <Route path='/adminprofile' component={AdminProfilePage} />
+          
           <Route path='/product/:id' component={ProductPage} />
           <Route path='/cart/:id?' component={CartPage} />
           <Route path='/admin/userlist' component={UserListPage} />
