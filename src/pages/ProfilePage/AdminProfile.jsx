@@ -29,7 +29,7 @@ const AdminProfilePage = ({ history }) => {
         ) : errorOrders ? (
           <ErrorMessage variant='danger'>{errorOrders}</ErrorMessage>
         ) : (
-          <Table striped bordered hover responsive className='table-sm'>
+          <Table striped bordered  responsive className='table-sm'>
             <thead>
               <tr>
                 <th>Product Name</th>
@@ -41,7 +41,7 @@ const AdminProfilePage = ({ history }) => {
                 <tr key={product._id}>
                   <td>{product.name}</td>
                   <td>
-                  <Table striped bordered hover responsive className='table-sm'>
+                  <Table striped bordered responsive className='table-sm'>
                     <thead>
                       <tr>
                         <th>User Name</th>
