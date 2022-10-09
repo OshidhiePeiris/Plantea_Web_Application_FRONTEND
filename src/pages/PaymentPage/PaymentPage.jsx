@@ -46,41 +46,49 @@ const PaymentPage = ({ history }) => {
               <Form.Label as='legend'>Select Method</Form.Label>
               <Col>
               <div onChange={(e) => setPaymentMethod(e.target.value)}>
-                <label style={{width:"50px"}} >
+                <label style={{width:"80px"}} >
                 <input
                   type='radio'
-                  src={Visa}
                   id='paymentMethod'
                   name='paymentMethod'
                   value='Visa Card'
                   checked
                 ></input>
-                <Image style={{width:"20px", float:"right"}} src={Visa}></Image>
-                </label>
-                <Form.Check
+                <Image style={{width:"50px", float:"right"}} src={Visa}></Image>
+                </label><br></br><br></br>
+
+                <label style={{width:"80px"}} >
+                <input
                   type='radio'
-                  src={Master}
-                  label='Master Card'
                   id='Master Card'
                   name='paymentMethod'
                   value='Master Card'
-                ></Form.Check>
-                <Form.Check
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={Master}></Image>
+                </label><br></br><br></br>
+
+                
+                <label style={{width:"80px"}} >
+                <input
                   type='radio'
-                  src={PayPal}
-                  label='PayPal'
                   id='PayPal'
                   name='paymentMethod'
                   value='PayPal'
-                ></Form.Check>
-                <Form.Check
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={PayPal}></Image>
+                </label><br></br><br></br>
+
+
+                <label style={{width:"80px"}} >
+                <input
                   type='radio'
-                  src={CashOD}
-                  label='Cash On Delivery'
                   id='Cash On Delivery'
                   name='paymentMethod'
                   value='Cash On Delivery'
-                ></Form.Check>
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={CashOD}></Image>
+                </label><br></br><br></br>
+
                 </div>
               </Col>
             </Form.Group>
