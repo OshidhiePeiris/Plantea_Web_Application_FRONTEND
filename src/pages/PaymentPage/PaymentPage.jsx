@@ -17,7 +17,7 @@ const PaymentPage = ({ history }) => {
     history.push('/shipping');
   }
 
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('Visa Card');
 
   const dispatch = useDispatch();
 
@@ -45,15 +45,15 @@ const PaymentPage = ({ history }) => {
             <Form.Group>
               <Form.Label as='legend'>Select Method</Form.Label>
               <Col>
+              <div onChange={(e) => setPaymentMethod(e.target.value)}>
                 <Form.Check
                   type='radio'
                   src={Visa}
                   label='Visa Card'
-                  id='Visa Card'
+                  id='paymentMethod'
                   name='paymentMethod'
                   value='Visa Card'
                   checked
-                  onChange={(e) => setPaymentMethod(e.target.value)}
                 ></Form.Check>
                 <Form.Check
                   type='radio'
@@ -62,8 +62,6 @@ const PaymentPage = ({ history }) => {
                   id='Master Card'
                   name='paymentMethod'
                   value='Master Card'
-                  checked
-                  onChange={(e) => setPaymentMethod(e.target.value)}
                 ></Form.Check>
                 <Form.Check
                   type='radio'
@@ -72,8 +70,6 @@ const PaymentPage = ({ history }) => {
                   id='PayPal'
                   name='paymentMethod'
                   value='PayPal'
-                  checked
-                  onChange={(e) => setPaymentMethod(e.target.value)}
                 ></Form.Check>
                 <Form.Check
                   type='radio'
@@ -82,9 +78,8 @@ const PaymentPage = ({ history }) => {
                   id='Cash On Delivery'
                   name='paymentMethod'
                   value='Cash On Delivery'
-                  checked
-                  onChange={(e) => setPaymentMethod(e.target.value)}
                 ></Form.Check>
+                </div>
               </Col>
             </Form.Group>
             <Button type='submit' variant='primary'>
