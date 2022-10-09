@@ -46,15 +46,17 @@ const PaymentPage = ({ history }) => {
               <Form.Label as='legend'>Select Method</Form.Label>
               <Col>
               <div onChange={(e) => setPaymentMethod(e.target.value)}>
-                <Form.Check
+                <label style={{width:"50px"}} >
+                <input
                   type='radio'
                   src={Visa}
-                  label='Visa Card'
                   id='paymentMethod'
                   name='paymentMethod'
                   value='Visa Card'
                   checked
-                ></Form.Check>
+                ></input>
+                <Image style={{width:"20px", float:"right"}} src={Visa}></Image>
+                </label>
                 <Form.Check
                   type='radio'
                   src={Master}
