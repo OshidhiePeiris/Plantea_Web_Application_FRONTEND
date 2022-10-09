@@ -171,12 +171,6 @@ const ProfilePage = ({ history }) => {
             </tbody>
           </Table>
         )}
-
-            {userInfo && userInfo.isAdmin && (
-                <Button href='/adminprofile' type='submit' variant='primary'>
-                Reviews
-              </Button>
-              )}
       </Col>
     </Row>
   );

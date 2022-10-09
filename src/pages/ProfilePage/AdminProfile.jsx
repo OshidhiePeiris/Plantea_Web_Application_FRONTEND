@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import {Row, Col, Table } from 'react-bootstrap';
+import {Row, Col, Table, Button } from 'react-bootstrap';
+import Pdf from "react-to-pdf";
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
@@ -7,6 +8,17 @@ import { listProducts } from '../../redux/reducers/product/product.actions';
 
 const AdminProfilePage = ({ history }) => {
   const dispatch = useDispatch();
+  const ref = React.createRef();
+
+  const options = {
+
+    orientation: "potrait",
+  
+    unit: "in",
+  
+    format: [20, 11],
+  
+  };
 
   const productList = useSelector((state) => state.productList);
   const {products} = productList;
@@ -22,8 +34,8 @@ const AdminProfilePage = ({ history }) => {
   return (
     <Row>
       <Col >
-
-        <h2>Reviews</h2>
+      <div ref={ref}>
+        <h2>Reviews</h2> 
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
@@ -59,14 +71,14 @@ const AdminProfilePage = ({ history }) => {
                       ))}
                     </tbody>
                   </Table></td>
-        
-            
             </tr>
-                
               ))}
             </tbody>
           </Table>
-        )}
+        )}</div>
+        <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+        {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Generate Report</Button>}
+      </Pdf>
       </Col>
     </Row>
   );
