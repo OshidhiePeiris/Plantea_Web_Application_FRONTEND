@@ -84,11 +84,11 @@ const UsersListPage = ({ history }) => {
                     </Button>
                   </LinkContainer>
                   <Button
-                    variant='danger'
+                    variant='light'
                     className='btn-sm'
                     onClick={() => deleteHandler(user._id)}
                   >
-                    <i className='fas fa-trash'></i>
+                    <i className='fas fa-trash' style={{color:"red"}}></i>
                   </Button>
                 </td>
               </tr>
