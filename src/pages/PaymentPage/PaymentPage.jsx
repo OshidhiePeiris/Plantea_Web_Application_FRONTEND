@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Payment from './Payment.jpg';
 import { savePaymentMethod } from '../../redux/reducers/cart/cart.actions';
 import CheckoutSteps from '../../components/checkoutsteps/CheckoutSteps';
+import Visa from './visa.png';
+import Master from './master-card.png';
+import PayPal from './paypal.png';
+import CashOD from './cash-on-delivery.png';
 
 const PaymentPage = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -43,10 +47,41 @@ const PaymentPage = ({ history }) => {
               <Col>
                 <Form.Check
                   type='radio'
-                  label='PayPal or Credit Card'
+                  src={Visa}
+                  label='Visa Card'
+                  id='Visa Card'
+                  name='paymentMethod'
+                  value='Visa Card'
+                  checked
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                ></Form.Check>
+                <Form.Check
+                  type='radio'
+                  src={Master}
+                  label='Master Card'
+                  id='Master Card'
+                  name='paymentMethod'
+                  value='Master Card'
+                  checked
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                ></Form.Check>
+                <Form.Check
+                  type='radio'
+                  src={PayPal}
+                  label='PayPal'
                   id='PayPal'
                   name='paymentMethod'
                   value='PayPal'
+                  checked
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                ></Form.Check>
+                <Form.Check
+                  type='radio'
+                  src={CashOD}
+                  label='Cash On Delivery'
+                  id='Cash On Delivery'
+                  name='paymentMethod'
+                  value='Cash On Delivery'
                   checked
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 ></Form.Check>

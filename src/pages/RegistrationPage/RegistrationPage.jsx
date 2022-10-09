@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { register } from '../../redux/reducers/user/user.actions';
-import Registration from './5506182.jpg';
+import Registration from './Registration.jpg';
 import Swal from 'sweetalert2';
 
 import VisibilityOffRoundedIcon from '@material-ui/icons/VisibilityOffRounded';
