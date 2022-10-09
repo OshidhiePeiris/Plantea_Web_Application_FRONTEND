@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import Payment from './Payment.png';
+import Payment from './Payment.jpg';
 import { savePaymentMethod } from '../../redux/reducers/cart/cart.actions';
 import CheckoutSteps from '../../components/checkoutsteps/CheckoutSteps';
+import Visa from './visa.png';
+import Master from './master-card.png';
+import PayPal from './paypal.png';
+import CashOD from './cash-on-delivery.png';
 
 const PaymentPage = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -13,7 +17,7 @@ const PaymentPage = ({ history }) => {
     history.push('/shipping');
   }
 
-  const [paymentMethod, setPaymentMethod] = useState('PayPal');
+  const [paymentMethod, setPaymentMethod] = useState('Visa Card');
 
   const dispatch = useDispatch();
 
@@ -41,15 +45,51 @@ const PaymentPage = ({ history }) => {
             <Form.Group>
               <Form.Label as='legend'>Select Method</Form.Label>
               <Col>
-                <Form.Check
+              <div onChange={(e) => setPaymentMethod(e.target.value)}>
+                <label style={{width:"80px"}} >
+                <input
                   type='radio'
-                  label='PayPal or Credit Card'
+                  id='paymentMethod'
+                  name='paymentMethod'
+                  value='Visa Card'
+                  checked
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={Visa}></Image>
+                </label><br></br><br></br>
+
+                <label style={{width:"80px"}} >
+                <input
+                  type='radio'
+                  id='Master Card'
+                  name='paymentMethod'
+                  value='Master Card'
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={Master}></Image>
+                </label><br></br><br></br>
+
+                
+                <label style={{width:"80px"}} >
+                <input
+                  type='radio'
                   id='PayPal'
                   name='paymentMethod'
                   value='PayPal'
-                  checked
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                ></Form.Check>
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={PayPal}></Image>
+                </label><br></br><br></br>
+
+
+                <label style={{width:"80px"}} >
+                <input
+                  type='radio'
+                  id='Cash On Delivery'
+                  name='paymentMethod'
+                  value='Cash On Delivery'
+                ></input>
+                <Image style={{width:"50px", float:"right"}} src={CashOD}></Image>
+                </label><br></br><br></br>
+
+                </div>
               </Col>
             </Form.Group>
             <Button type='submit' variant='primary'>
