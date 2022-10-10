@@ -6,9 +6,22 @@ import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { listUsers, deleteUser } from '../../redux/reducers/user/user.actions';
 import Swal from 'sweetalert2';
+import Pdf from "react-to-pdf";
 
 const UsersListPage = ({ history }) => {
   const dispatch = useDispatch();
+
+  const ref = React.createRef();
+
+  const options = {
+
+    orientation: "potrait",
+  
+    unit: "in",
+  
+    format: [20, 10],
+  
+  };
 
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -46,6 +59,7 @@ const UsersListPage = ({ history }) => {
   };
   return (
     <>
+    <div ref={ref} id={'body'}>
       <h1>Users</h1>
       {loading ? (
         <Loader />
@@ -96,6 +110,10 @@ const UsersListPage = ({ history }) => {
           </tbody>
         </Table>
       )}
+      </div>
+      <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+        {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
+      </Pdf>
     </>
   );
 };
