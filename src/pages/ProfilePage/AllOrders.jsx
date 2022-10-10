@@ -1,31 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Table } from 'react-bootstrap';
+import React, {  useEffect } from 'react';
+import {  Button, Row, Col, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import {
-  getUserDetails,
-  updateUserProfile,
+  getUserDetails
 } from '../../redux/reducers/user/user.actions';
 import UserActionTypes from '../../redux/reducers/user/user.types';
 import { listMyOrders } from '../../redux/reducers/order/order.actions';
 import { listProducts } from '../../redux/reducers/product/product.actions';
 
-const ProfilePage = ({ history }) => {
-  const [name, setName] = useState('');
+const AllOrdersPage = ({ history }) => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
   
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
+  const {  user } = userDetails;
 
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
@@ -41,10 +35,7 @@ const ProfilePage = ({ history }) => {
         dispatch({ type: UserActionTypes.USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails('profile'));
         dispatch(listMyOrders());
-      } else {
-        setName(user.name);
-        setEmail(user.email);
-      }
+      } 
     }
   }, [dispatch, history, userInfo, user, success]);
   useEffect(() => {
@@ -52,78 +43,11 @@ const ProfilePage = ({ history }) => {
   }, [dispatch]);
 
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      setMessage('Passwords do not match!');
-    } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
-    }
-  };
+ 
 
   return (
     <Row>
-      <Col md={3}>
-        <h2>{`${user.name}'s Profile`}</h2>
-        {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
-
-        {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
-
-        {success && (
-          <ErrorMessage variant='success'>Profile Updated!</ErrorMessage>
-        )}
-
-        {loading ? (
-          <Loader />
-        ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId='name'>
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type='name'
-                value={name}
-                placeholder='Enter Your Name'
-                onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId='email'>
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type='email'
-                value={email}
-                placeholder='Enter Email'
-                onChange={(e) => setEmail(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId='password'>
-              <Form.Label>Password</Form.Label>
-
-              <Form.Control
-                type='text'
-                value={password}
-                placeholder='Enter Password'
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group controlId='confirmPassword'>
-              <Form.Label>Confirm Password</Form.Label>
-
-              <Form.Control
-                type='text'
-                value={confirmPassword}
-                placeholder='Confirm Password'
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </Form.Group>
-            <Button type='submit' variant='primary'>
-              Update
-            </Button>
-          </Form>
-        )}
-      </Col>
-      <Col md={9}>
+      <Col>
         <h2>My Orders</h2>
         {loadingOrders ? (
           <Loader />
@@ -169,18 +93,14 @@ const ProfilePage = ({ history }) => {
                 </tr>
               ))}
             </tbody>
-            <br />
-            <LinkContainer to={`/allOrderes`}>
-            <Button  variant='primary'>
-              View All Orders
-            </Button>
-                    </LinkContainer>
+            
             
           </Table>
         )}
+        <Button style={{float:"right"}} onClick={() => window.print()} variant='primary'>Generate Report</Button>
       </Col>
     </Row>
   );
 };
 
-export default ProfilePage;
+export default AllOrdersPage;

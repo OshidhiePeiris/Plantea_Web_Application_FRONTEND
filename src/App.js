@@ -24,6 +24,7 @@ import ProductReport from './pages/ProductReportPage/ProductReport';
 import ProductCount from './pages/ProductReportPage/ProductCount';
 import ProductExpenses from './pages/ProductReportPage/ProductExpenses';
 import ProductsReportGen from './pages/ProductReportPage/ProductsReportGen';
+import AllOrdersPage from './pages/ProfilePage/AllOrders';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
           <Route path='/login' component={LoginPage} />
           <Route path='/register' component={RegistrationPage} />
           <Route path='/profile' component={ProfilePage} />
+          <Route path='/allOrderes' component={AllOrdersPage} />
           <Route path='/adminprofile' component={AdminProfilePage} />
           
           <Route path='/product/:id' component={ProductPage} />
