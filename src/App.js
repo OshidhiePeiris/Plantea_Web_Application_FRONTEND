@@ -20,6 +20,10 @@ import UserEditPage from './pages/UserEditPage/UserEditPage';
 import ProductsListPage from './pages/ProductsListPage/ProductsListPage';
 import ProductEditPage from './pages/ProductEditPage/ProductEditPage';
 import ProductAddPage from './pages/ProductAddPage/ProductAdd';
+import ProductReport from './pages/ProductReportPage/ProductReport';
+import ProductCount from './pages/ProductReportPage/ProductCount';
+import ProductExpenses from './pages/ProductReportPage/ProductExpenses';
+import ProductsReportGen from './pages/ProductReportPage/ProductsReportGen';
 import AllOrdersPage from './pages/ProfilePage/AllOrders';
 
 const App = () => {
@@ -43,6 +47,10 @@ const App = () => {
           <Route path='/admin/userlist' component={UserListPage} />
           <Route path='/admin/user/:id/edit' component={UserEditPage} />
           <Route path='/admin/productlist' component={ProductsListPage} exact />
+          <Route path='/admin/report' component={ProductReport}/>
+          <Route path='/admin/report' component={ProductCount}/>
+          <Route path='/admin/report' component={ProductExpenses}/>
+          <Route path='/admin/report' component={ProductsReportGen}/>
           <Route
             path='/admin/productlist/:pageNumber'
             component={ProductsListPage}

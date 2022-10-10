@@ -6,6 +6,10 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
   productUpdateReducer,
+  productStockReducer,
+  productProCountReducer,
+  productExpenseReducer,
+  productExpenseForProdReducer,
 } from './reducers/product/product.reducer';
 import { productDetailsReducer } from './reducers/productdetails/productdetails.reducer';
 import { cartReducer } from './reducers/cart/cart.reducer';
@@ -35,6 +39,10 @@ const rootReducer = combineReducers({
   productUpdate: productUpdateReducer,
   productReviewCreate: productReviewCreateReducer,
   productTopRated: productTopRatedReducer,
+  productStock : productStockReducer,
+  productProCount : productProCountReducer,
+  productExpense : productExpenseReducer,
+  productExpenseForProduct : productExpenseForProdReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

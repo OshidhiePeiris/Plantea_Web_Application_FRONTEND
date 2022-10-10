@@ -177,3 +177,89 @@ export const listTopProducts = () => async (dispatch) => {
     });
   }
 };
+
+export const listStock = () => async (dispatch) => {
+  try {
+    dispatch({ type: ProductActionTypes.PRODUCT_STOCK_REQUEST });
+
+    const { data } = await axios.get(`/api/products/stock`);
+
+    dispatch({
+      type: ProductActionTypes.PRODUCT_STOCK_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCT_STOCK_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listProdCount = () => async (dispatch) => {
+  try {
+    dispatch({ type: ProductActionTypes.PRODUCT_COUNT_REQUEST });
+
+    const { data } = await axios.get(`/api/products/count`);
+
+    dispatch({
+      type: ProductActionTypes.PRODUCT_COUNT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCT_COUNT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+
+export const listProductExpenses = () => async (dispatch) => {
+  try {
+    dispatch({ type: ProductActionTypes.PRODUCT_EXPENSE_REQUEST });
+
+    const { data } = await axios.get(`/api/products/total`);
+
+    dispatch({
+      type: ProductActionTypes.PRODUCT_EXPENSE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCT_EXPENSE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const listExpensesForProd = () => async (dispatch) => {
+  try {
+    dispatch({ type: ProductActionTypes.PRODUCT_EXPENSEFORPRODUCT_REQUEST });
+
+    const { data } = await axios.get(`/api/products/expenses`);
+
+    dispatch({
+      type: ProductActionTypes.PRODUCT_EXPENSEFORPRODUCT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCT_EXPENSEFORPRODUCT_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+

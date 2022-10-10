@@ -125,3 +125,56 @@ export const productTopRatedReducer = (state = { products: [] }, action) => {
       return state;
   }
 };
+
+export const productStockReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case ProductActionTypes.PRODUCT_STOCK_REQUEST:
+      return { loading: true, products: [] };
+    case ProductActionTypes.PRODUCT_STOCK_SUCCESS:
+      return { loading: false, products: action.payload };
+    case ProductActionTypes.PRODUCT_STOCK_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productProCountReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case ProductActionTypes.PRODUCT_COUNT_REQUEST:
+      return { loading: true, products: [] };
+    case ProductActionTypes.PRODUCT_COUNT_SUCCESS:
+      return { loading: false, products: action.payload };
+    case ProductActionTypes.PRODUCT_COUNT_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productExpenseReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case ProductActionTypes.PRODUCT_EXPENSE_REQUEST:
+      return { loading: true, products: [] };
+    case ProductActionTypes.PRODUCT_EXPENSE_SUCCESS:
+      return { loading: false, products: action.payload };
+    case ProductActionTypes.PRODUCT_EXPENSE_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const productExpenseForProdReducer = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case ProductActionTypes.PRODUCT_EXPENSEFORPRODUCT_REQUEST:
+      return { loading: true, products: [] };
+    case ProductActionTypes.PRODUCT_EXPENSEFORPRODUCT_SUCCESS:
+      return { loading: false, products: action.payload };
+    case ProductActionTypes.PRODUCT_EXPENSEFORPRODUCT_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
