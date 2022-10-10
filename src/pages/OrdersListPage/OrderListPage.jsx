@@ -58,6 +58,8 @@ const OrderListPage = ({ history }) => {
               else if(order.user && order.user.name.toLowerCase().includes(search.toLowerCase())) {
                 return order;
               }
+              else
+              return null;
             }).map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>

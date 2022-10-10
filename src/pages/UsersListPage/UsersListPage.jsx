@@ -23,6 +23,10 @@ const UsersListPage = ({ history }) => {
   
   };
 
+  const [search, setSearch] = React.useState("");
+
+  
+
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
@@ -59,6 +63,8 @@ const UsersListPage = ({ history }) => {
   };
   return (
     <>
+    <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
+            onChange={(event) => setSearch(event.target.value)}></input>
     <div ref={ref} id={'body'}>
       <h1>Users</h1>
       {loading ? (
@@ -77,7 +83,16 @@ const UsersListPage = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+          {users.filter((user) => {
+              if(search === "") {
+                return user;
+              } 
+              else if(user.name.toLowerCase().includes(search.toLowerCase())) {
+                return user;
+              }
+              else
+              return null;
+            }).map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>
