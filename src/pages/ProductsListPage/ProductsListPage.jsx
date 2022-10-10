@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -81,16 +82,42 @@ const ProductsListPage = ({ history, match }) => {
   const createProductHandler = () => {
     dispatch(createProduct());
   };
+
+  const [searchWord,setSearchWord] = useState("");
+  const handleFilter = (event)=>{
+   
+    const searchPlant = event.target.value;
+    console.log(searchPlant);
+    setSearchWord(searchPlant);
+ 
+    if (searchPlant === ''){
+      console.log("Empty")
+      dispatch(listProducts('',pageNumber))
+    }else {
+      dispatch(listProducts(searchWord,pageNumber))
+    }
+
+
+  }
   return (
     <>
       <Row className='align-items-center'>
         <Col>
           <h1>Products</h1>
         </Col>
+        <Col>
+         <input className='form-control' type='search' placeholder='Search' name='searchPlant' onChange={handleFilter}></input>
+        </Col>
         <Col className='text-right'>
           <Button className='my-3' onClick={createProductHandler}>
             <i className='fas fa-plus'></i> Create Product
           </Button>
+        </Col>
+        <Col className='text-right'>
+        <Link to='/admin/report'>
+          <Button className='my-3'>
+            View Reports
+          </Button></Link>
         </Col>
       </Row>
       {loadingDelete && <Loader />}
@@ -114,6 +141,7 @@ const ProductsListPage = ({ history, match }) => {
                 <th>NAME</th>
                 <th>PRICE</th>
                 <th>CATEGORY</th>
+                <th>Stock</th>
                 <th></th>
               </tr>
             </thead>
@@ -124,6 +152,7 @@ const ProductsListPage = ({ history, match }) => {
                   <td>{product.name}</td>
                   <td>${product.price}</td>
                   <td>{product.category}</td>
+                  <td>{product.countInStock}</td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant='light' className='btn-sm'>
