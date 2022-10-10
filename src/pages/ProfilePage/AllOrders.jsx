@@ -97,6 +97,7 @@ const AllOrdersPage = ({ history }) => {
             
           </Table>
         )}
+        <Button style={{float:"right"}} onClick={() => window.print()} variant='primary'>Generate Report</Button>
       </Col>
     </Row>
   );
