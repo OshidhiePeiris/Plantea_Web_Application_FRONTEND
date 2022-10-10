@@ -126,7 +126,7 @@ const UsersListPage = ({ history }) => {
         </Table>
       )}
       </div>
-      <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+      <Pdf targetRef={ref} filename="All Users.pdf" options={options}>
         {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
       </Pdf>
     </>
