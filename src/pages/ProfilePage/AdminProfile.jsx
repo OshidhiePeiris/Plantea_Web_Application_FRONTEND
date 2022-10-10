@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import {Row, Col, Table, Button } from 'react-bootstrap';
+import {Link} from "react-router-dom";
 import Pdf from "react-to-pdf";
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
+import {jsPDF} from "jspdf";
 import { listProducts } from '../../redux/reducers/product/product.actions';
 
 const AdminProfilePage = ({ history }) => {
@@ -26,6 +28,19 @@ const AdminProfilePage = ({ history }) => {
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders } = orderListMy;
 
+  const genaratePDF=()=>{
+    let doc =new jsPDF('p','pt','a1');
+    doc.html(document.querySelector('#body'),{
+        callback:function (doc) {
+            doc.save('Room Booking Management Report.pdf');
+        },
+        margin:[60,60,60,60],
+        x:32,
+        y:32
+    });
+
+}
+
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
@@ -34,7 +49,7 @@ const AdminProfilePage = ({ history }) => {
   return (
     <Row>
       <Col >
-      <div ref={ref}>
+      <div ref={ref} id={'body'}>
         <h2>Reviews</h2> 
         {loadingOrders ? (
           <Loader />
@@ -79,6 +94,10 @@ const AdminProfilePage = ({ history }) => {
         <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
         {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Generate Report</Button>}
       </Pdf>
+      <Link className="btn btn-success btngena" role="button" id={"generate"} onClick={() => window.print()}>
+                Generate Report&nbsp;&nbsp;
+                <em className="fa fa-file-pdf-o" id="icon"></em>
+            </Link>
       </Col>
     </Row>
   );
