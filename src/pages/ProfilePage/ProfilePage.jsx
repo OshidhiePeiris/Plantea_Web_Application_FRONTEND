@@ -169,6 +169,10 @@ const ProfilePage = ({ history }) => {
                 </tr>
               ))}
             </tbody>
+            <br />
+            <Button type='submit' variant='primary'>
+              Generate Report
+            </Button>
           </Table>
         )}
       </Col>
