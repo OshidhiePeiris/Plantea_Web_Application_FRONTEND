@@ -6,13 +6,12 @@ import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { listOrders } from '../../redux/reducers/order/order.actions';
 
-
 const OrderListPage = ({ history }) => {
   const dispatch = useDispatch();
 
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
-
+  const [search, setSearch] = React.useState("");
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -27,12 +26,19 @@ const OrderListPage = ({ history }) => {
   return (
     <>
       <h1>Orders</h1>
+      <input
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            />
       {loading ? (
         <Loader />
       ) : error ? (
         <ErrorMessage variant='danger'>{error}</ErrorMessage>
+
       ) : (
+        
         <Table>
+          
           <thead>
             <tr>
               <th>ID</th>
@@ -45,7 +51,14 @@ const OrderListPage = ({ history }) => {
             </tr>
           </thead>
           <tbody>
-            {orders.map((order) => (
+            {orders.filter((order) => {
+              if(search === "") {
+                return order;
+              } 
+              else if(order.user && order.user.name.toLowerCase().includes(search.toLowerCase())) {
+                return order;
+              }
+            }).map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
@@ -53,17 +66,19 @@ const OrderListPage = ({ history }) => {
                 <td>${order.totalPrice} </td>
 
                 <td>
-                <select style={{border: 'none'}} name="cars" id="cars">
-                  <option value="volvo">Yes</option>
-                  <option value="saab">No</option>
-                </select>
+                  {order.isPaid ? (
+                    order.paidAt.substring(0, 10)
+                  ) : (
+                    <i className='fas fa-times' style={{ color: 'red' }} />
+                  )}
                 </td>
 
                 <td>
-                <select style={{border: 'none'}} name="cars" id="cars">
-                  <option value="volvo">Yes</option>
-                  <option value="saab">No</option>
-                </select>
+                  {order.isDelivered ? (
+                    order.deliveredAt.substring(0, 10)
+                  ) : (
+                    <i className='fas fa-check' style={{ color: 'red' }} />
+                  )}
                 </td>
                 <td>
                   <LinkContainer to={`/order/${order._id}`}>
