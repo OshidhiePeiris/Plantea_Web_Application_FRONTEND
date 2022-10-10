@@ -26,6 +26,7 @@ const AdminProfilePage = ({ history }) => {
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders } = orderListMy;
 
+
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
@@ -34,7 +35,7 @@ const AdminProfilePage = ({ history }) => {
   return (
     <Row>
       <Col >
-      <div ref={ref}>
+      <div ref={ref} id={'body'}>
         <h2>Reviews</h2> 
         {loadingOrders ? (
           <Loader />
@@ -77,8 +78,9 @@ const AdminProfilePage = ({ history }) => {
           </Table>
         )}</div>
         <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
-        {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Generate Report</Button>}
+        {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
       </Pdf>
+      <Button style={{float:"right"}} onClick={() => window.print()} variant='primary'>Print</Button>
       </Col>
     </Row>
   );
