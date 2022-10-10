@@ -26,10 +26,8 @@ const OrderListPage = ({ history }) => {
   return (
     <>
       <h1>Orders</h1>
-      <input
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            />
+      <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
+            onChange={(event) => setSearch(event.target.value)}></input>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -58,6 +56,8 @@ const OrderListPage = ({ history }) => {
               else if(order.user && order.user.name.toLowerCase().includes(search.toLowerCase())) {
                 return order;
               }
+              else
+              return null;
             }).map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
@@ -77,7 +77,7 @@ const OrderListPage = ({ history }) => {
                   {order.isDelivered ? (
                     order.deliveredAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-check' style={{ color: 'red' }} />
+                    <i className='fas fa-check' style={{ color: 'green' }} />
                   )}
                 </td>
                 <td>

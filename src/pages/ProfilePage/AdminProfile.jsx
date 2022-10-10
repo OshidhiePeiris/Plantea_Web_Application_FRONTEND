@@ -20,6 +20,7 @@ const AdminProfilePage = ({ history }) => {
   
   };
 
+  const [search, setSearch] = React.useState("");
   const productList = useSelector((state) => state.productList);
   const {products} = productList;
 
@@ -35,6 +36,8 @@ const AdminProfilePage = ({ history }) => {
   return (
     <Row>
       <Col >
+      <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
+            onChange={(event) => setSearch(event.target.value)}></input>
       <div ref={ref} id={'body'}>
         <h2>Reviews</h2> 
         {loadingOrders ? (
@@ -50,7 +53,16 @@ const AdminProfilePage = ({ history }) => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+            {products.filter((product) => {
+              if(search === "") {
+                return product;
+              } 
+              else if(product.name.toLowerCase().includes(search.toLowerCase())) {
+                return product;
+              }
+              else
+              return null;
+            }).map((product) => (
                 <tr key={product._id}>
                   <td>{product.name}</td>
                   <td>
