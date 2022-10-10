@@ -20,11 +20,13 @@ const AdminProfilePage = ({ history }) => {
   
   };
 
+  const [search, setSearch] = React.useState("");
   const productList = useSelector((state) => state.productList);
   const {products} = productList;
 
   const orderListMy = useSelector((state) => state.orderListMy);
   const { loading: loadingOrders, error: errorOrders } = orderListMy;
+
 
   useEffect(() => {
     dispatch(listProducts());
@@ -34,7 +36,9 @@ const AdminProfilePage = ({ history }) => {
   return (
     <Row>
       <Col >
-      <div ref={ref}>
+      <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
+            onChange={(event) => setSearch(event.target.value)}></input>
+      <div ref={ref} id={'body'}>
         <h2>Reviews</h2> 
         {loadingOrders ? (
           <Loader />
@@ -49,7 +53,16 @@ const AdminProfilePage = ({ history }) => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product) => (
+            {products.filter((product) => {
+              if(search === "") {
+                return product;
+              } 
+              else if(product.name.toLowerCase().includes(search.toLowerCase())) {
+                return product;
+              }
+              else
+              return null;
+            }).map((product) => (
                 <tr key={product._id}>
                   <td>{product.name}</td>
                   <td>
@@ -77,8 +90,9 @@ const AdminProfilePage = ({ history }) => {
           </Table>
         )}</div>
         <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
-        {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Generate Report</Button>}
+        {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
       </Pdf>
+      <Button style={{float:"right"}} onClick={() => window.print()} variant='primary'>Print</Button>
       </Col>
     </Row>
   );
