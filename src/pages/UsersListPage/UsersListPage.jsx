@@ -66,7 +66,7 @@ const UsersListPage = ({ history }) => {
     <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
             onChange={(event) => setSearch(event.target.value)}></input>
     <div ref={ref} id={'body'}>
-      <h1>Users</h1>
+      <h1 style={{marginLeft:'10px'}}>Users</h1>
       {loading ? (
         <Loader />
       ) : error ? (
