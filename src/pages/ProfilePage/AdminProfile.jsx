@@ -39,7 +39,7 @@ const AdminProfilePage = ({ history }) => {
       <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
             onChange={(event) => setSearch(event.target.value)}></input>
       <div ref={ref} id={'body'}>
-        <h2>Reviews</h2> 
+        <center><h2>Reviews</h2> </center>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
