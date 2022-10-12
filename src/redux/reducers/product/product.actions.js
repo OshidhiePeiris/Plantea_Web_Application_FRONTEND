@@ -21,8 +21,8 @@ export const listProducts =
       dispatch({
         type: ProductActionTypes.PRODUCT_LIST_FAILURE,
         payload:
-          error.message && error.response.data.message
-            ? error.response.data.message
+          error.message && error.response?.data?.message
+            ? error.response?.data?.message
             : error.message,
       });
     }
