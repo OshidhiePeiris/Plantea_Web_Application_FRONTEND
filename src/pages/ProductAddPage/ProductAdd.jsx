@@ -146,7 +146,7 @@ const ProductAddPage = ({ match, history }) => {
                 </Form.Group>
 
                 <Form.Group controlId='image'>
-                  <Form.Label>Image</Form.Label>
+                  <Form.Label>Image </Form.Label>
                   {/* <Form.Control
                     type='text'
                     
