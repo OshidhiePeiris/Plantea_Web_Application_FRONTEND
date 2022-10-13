@@ -34,6 +34,34 @@ export const createOrder = (order) => async (dispatch, getState) => {
   }
 };
 
+export const deleteOrder = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: OrderActionTypes.ORDER_DELETE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    };
+
+    await axios.delete(`/api/orders/${id}`, config);
+    dispatch({
+      type: OrderActionTypes.ORDER_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: OrderActionTypes.ORDER_DELETE_FAILURE,
+      payload:
+        error.message && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 export const getOrderDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({

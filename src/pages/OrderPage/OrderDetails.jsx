@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { PayPalButton } from 'react-paypal-button-v2';
 import { Link } from 'react-router-dom';
 import {
   getOrderDetails,
@@ -12,23 +10,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { OrderActionTypes } from '../../redux/reducers/order/order.types';
+import Pdf from "react-to-pdf";
 
-const OrderPage = ({ history, match }) => {
+const OrderDetails = ({ history, match }) => {
+  const ref = React.createRef();
   const orderId = match.params.id;
-  const [sdkReady, setSdkReady] = useState(false);
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  const { success: successPay, loading: loadingPay } = orderPay;
+  const { success: successPay} = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
-  const { success: successDeliver, loading: loadingDeliver } = orderDeliver;
+  const { success: successDeliver} = orderDeliver;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  const options = {
+
+    orientation: "potrait",
+
+    unit: "in",
+
+    format: [20, 8],
+
+  };
 
   if (!loading) {
     //calculate price
@@ -48,34 +56,17 @@ const OrderPage = ({ history, match }) => {
     if (!userInfo) {
       history.push('/login');
     }
-    const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get('/api/config/paypal');
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-
-      document.body.appendChild(script);
-    };
     if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: OrderActionTypes.ORDER_PAY_RESET });
       dispatch({ type: OrderActionTypes.ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
-      if (!window.paypal) {
-        addPaypalScript();
-      } else {
-        setSdkReady(true);
-      }
-    }
+    } 
   }, [dispatch, orderId, successPay, successDeliver, history, userInfo, order]);
 
-  const successPaymentHandler = (paymentResult) => {
-    dispatch(payOrder(orderId, paymentResult));
+  const successPaymentHandler = () => {
+    dispatch(payOrder(order));
   };
+  
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order));
@@ -89,6 +80,7 @@ const OrderPage = ({ history, match }) => {
       <Link to='/admin/orderlist' className='btn btn-primary my-3'>
         Go Back
       </Link>{' '}
+      <div ref={ref} id={'body'}>
       <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>
@@ -159,6 +151,7 @@ const OrderPage = ({ history, match }) => {
                     </ListGroup.Item>
                   ))}
                 </ListGroup>
+                
               )}
             </ListGroup.Item>
           </ListGroup>
@@ -193,18 +186,16 @@ const OrderPage = ({ history, match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
-              
-                <ListGroup.Item>
-                 
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      onSuccess={successPaymentHandler}
-                    />
-               
+              <ListGroup.Item>
+                  <Button
+                    type='button'
+                    className='btn btn-block'
+                    onClick={successPaymentHandler}
+                  >
+                    Demo Pay
+                  </Button>
                 </ListGroup.Item>
-           
-              {loadingDeliver && <Loader />}
-              {userInfo && order.isPaid && !order.isDelivered && (
+            
                 <ListGroup.Item>
                   <Button
                     type='button'
@@ -214,13 +205,19 @@ const OrderPage = ({ history, match }) => {
                     Mark As Delivered!
                   </Button>
                 </ListGroup.Item>
-              )}
+       
             </ListGroup>
           </Card>
         </Col>
       </Row>
+      </div>
+      <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+          {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
+        </Pdf>
+        <Button style={{ float: "right" }} onClick={() => window.print()} variant='primary'>Print</Button>
+        
     </>
   );
 };
 
-export default OrderPage;
+export default OrderDetails;

@@ -31,6 +31,28 @@ export const orderCreateReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+export const orderDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case OrderActionTypes.ORDER_DELETE_REQUEST:
+      return {
+        loading: true,
+      };
+    case OrderActionTypes.ORDER_DELETE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case OrderActionTypes.ORDER_DELETE_FAILURE:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+
 export const orderDetailsReducer = (
   state = { loading: true, orderItems: [], shippingAddress: {} },
   action

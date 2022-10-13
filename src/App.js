@@ -14,6 +14,7 @@ import ShippingPage from './pages/ShippingPage/ShippingPage';
 import PaymentPage from './pages/PaymentPage/PaymentPage';
 import PlaceOrderPage from './pages/PlaceOrderPage/PlaceOrderPage';
 import OrderPage from './pages/OrderPage/OrderPage';
+import OrderDetails from './pages/OrderPage/OrderDetails';
 import OrderListPage from './pages/OrdersListPage/OrderListPage';
 import UserListPage from './pages/UsersListPage/UsersListPage';
 import UserEditPage from './pages/UserEditPage/UserEditPage';
@@ -33,6 +34,7 @@ const App = () => {
       <main className='py-3'>
         <Container>
           <Route path='/order/:id' component={OrderPage} />
+          <Route path='/orderdata/:id' component={OrderDetails} />
           <Route path='/shipping' component={ShippingPage} />
           <Route path='/payment' component={PaymentPage} />
           <Route path='/placeorder' component={PlaceOrderPage} />
