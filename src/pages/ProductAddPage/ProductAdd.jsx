@@ -186,6 +186,7 @@ const ProductAddPage = ({ match, history }) => {
                         <Dropdown.Item eventKey="Flora">Flora</Dropdown.Item>
                         <Dropdown.Item eventKey="Fruits">Fruits</Dropdown.Item>
                         <Dropdown.Item eventKey="Herbs">Herbs</Dropdown.Item>
+                        <Dropdown.Item eventKey="Vines">Vines</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
                 </Form.Group>
