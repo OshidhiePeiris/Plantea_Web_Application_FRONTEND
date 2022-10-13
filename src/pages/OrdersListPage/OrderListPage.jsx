@@ -4,10 +4,14 @@ import { Table, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
-import { listOrders } from '../../redux/reducers/order/order.actions';
+import { listOrders,deleteOrder } from '../../redux/reducers/order/order.actions';
+import Pdf from "react-to-pdf";
+import OrderActionTypes from '../../redux/reducers/order/order.types';
+import Swal from 'sweetalert2';
 
 const OrderListPage = ({ history }) => {
   const dispatch = useDispatch();
+  const ref = React.createRef();
 
   const orderList = useSelector((state) => state.orderList);
   const { loading, error, orders } = orderList;
@@ -15,19 +19,60 @@ const OrderListPage = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const options = {
+
+    orientation: "potrait",
+
+    unit: "in",
+
+    format: [20, 10],
+
+  };
+  
+  const orderDelete = useSelector((state) => state.orderDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = orderDelete;
+
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listOrders());
     } else {
       history.push('/login');
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history,successDelete, userInfo]);
+
+  const deleteHandler = (id) => {
+    Swal.fire({
+      title: 'Are you sure to delete this Order?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteOrder(id));
+
+        Swal.fire('Deleted!', 'Your Order has been deleted.', 'success');
+      }
+    });
+  };
 
   return (
     <>
+    <div ref={ref} id={'body'}>
       <h1>Orders</h1>
       <input className='form-control' type='search' placeholder='Search' name='searchPlant' value={search}
             onChange={(event) => setSearch(event.target.value)}></input>
+      {loadingDelete && <Loader />}
+      {errorDelete && (
+        <ErrorMessage variant='danger'>{errorDelete}</ErrorMessage>
+      )}    
       {loading ? (
         <Loader />
       ) : error ? (
@@ -69,7 +114,7 @@ const OrderListPage = ({ history }) => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }} />
+                    <i className='fas fa-check' style={{ color: 'red' }} />
                   )}
                 </td>
 
@@ -81,7 +126,16 @@ const OrderListPage = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/order/${order._id}`}>
+                <Button
+                      variant='light'
+                      className='btn-sm'
+                      onClick={() => deleteHandler(order._id)}
+                    >
+                      <i className='fas fa-trash' style={{color:"red"}}></i>
+                    </Button>
+                </td>
+                <td>
+                  <LinkContainer to={`/orderdata/${order._id}`}>
                     <Button variant='dark' className='btn-sm'>
                       Details
                     </Button>
@@ -91,8 +145,15 @@ const OrderListPage = ({ history }) => {
             ))}
           </tbody>
         </Table>
-      )}
+      )}</div>
+      
+       <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+          {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
+        </Pdf>
+        <Button style={{ float: "right" }} onClick={() => window.print()} variant='primary'>Print</Button>
+        
     </>
+    
   );
 };
 

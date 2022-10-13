@@ -55,6 +55,33 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     });
   }
 };
+export const deleteReview = (product) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ProductActionTypes.PRODUCTREVIEW_DELETE_REQUEST,
+    });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    };
+
+    await axios.delete(`/api/products/${product.review._id}`, config);
+    dispatch({
+      type: ProductActionTypes.PRODUCTREVIEW_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCTREVIEW_DELETE_FAILURE,
+      payload:
+        error.message && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 
 export const createProduct = () => async (dispatch, getState) => {
   try {

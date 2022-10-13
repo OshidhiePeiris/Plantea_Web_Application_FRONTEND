@@ -112,6 +112,26 @@ export const productReviewCreateReducer = (state = {}, action) => {
       return state;
   }
 };
+export const productReviewDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ProductActionTypes.PRODUCTREVIEW_DELETE_REQUEST:
+      return {
+        loading: true,
+      };
+    case ProductActionTypes.PRODUCTREVIEW_DELETE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case ProductActionTypes.PRODUCTREVIEW_DELETE_FAILURE:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 export const productTopRatedReducer = (state = { products: [] }, action) => {
   switch (action.type) {
