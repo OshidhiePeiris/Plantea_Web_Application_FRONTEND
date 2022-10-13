@@ -68,7 +68,7 @@ const ProductAddPage = ({ match, history }) => {
           'Content-Type': 'multipart/form-data',
         },
       };
-      const { data } = await axios.post('/api/upload', formData, config);
+      const { data } = await axios.post('https://plantae-backend.herokuapp.com/api/upload', formData, config);
       setImage(data);
       setUploading(false);
     } catch (error) {
