@@ -6,7 +6,6 @@ import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { listOrders,deleteOrder } from '../../redux/reducers/order/order.actions';
 import Pdf from "react-to-pdf";
-import OrderActionTypes from '../../redux/reducers/order/order.types';
 import Swal from 'sweetalert2';
 
 const OrderListPage = ({ history }) => {
@@ -25,7 +24,7 @@ const OrderListPage = ({ history }) => {
 
     unit: "in",
 
-    format: [20, 10],
+    format: [20, 9],
 
   };
   
@@ -114,7 +113,7 @@ const OrderListPage = ({ history }) => {
                   {order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (
-                    <i className='fas fa-check' style={{ color: 'red' }} />
+                    <i className='fas fa-times' style={{ color: 'red' }} />
                   )}
                 </td>
 
@@ -147,7 +146,7 @@ const OrderListPage = ({ history }) => {
         </Table>
       )}</div>
       
-       <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+       <Pdf targetRef={ref} filename="All Orders.pdf" options={options}>
           {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
         </Pdf>
         <Button style={{ float: "right" }} onClick={() => window.print()} variant='primary'>Print</Button>

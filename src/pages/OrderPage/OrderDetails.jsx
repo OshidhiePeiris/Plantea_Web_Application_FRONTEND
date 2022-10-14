@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   getOrderDetails,
@@ -211,7 +211,7 @@ const OrderDetails = ({ history, match }) => {
         </Col>
       </Row>
       </div>
-      <Pdf targetRef={ref} filename="All Reviews.pdf" options={options}>
+      <Pdf targetRef={ref} filename="Order Reciept.pdf" options={options}>
           {({ toPdf }) => <Button onClick={toPdf} variant='primary'>Save As PDF</Button>}
         </Pdf>
         <Button style={{ float: "right" }} onClick={() => window.print()} variant='primary'>Print</Button>

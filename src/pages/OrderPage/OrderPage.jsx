@@ -22,7 +22,7 @@ const OrderPage = ({ history, match }) => {
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector((state) => state.orderPay);
-  const { success: successPay, loading: loadingPay } = orderPay;
+  const { success: successPay} = orderPay;
 
   const orderDeliver = useSelector((state) => state.orderDeliver);
   const { success: successDeliver, loading: loadingDeliver } = orderDeliver;
