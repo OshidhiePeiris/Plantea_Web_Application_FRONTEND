@@ -18,7 +18,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post('/api/orders', order, config);
+    const { data } = await axios.post('https://plantae-backend.herokuapp.com/api/orders', order, config);
     dispatch({
       type: OrderActionTypes.ORDER_CREATE_SUCCESS,
       payload: data,
@@ -78,7 +78,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}`, config);
+    const { data } = await axios.get(`https://plantae-backend.herokuapp.com/api/orders/${id}`, config);
     dispatch({
       type: OrderActionTypes.ORDER_DETAILS_SUCCESS,
       payload: data,
@@ -113,7 +113,7 @@ export const payOrder =
       };
 
       const { data } = await axios.put(
-        `/api/orders/${orderID}/pay`,
+        `https://plantae-backend.herokuapp.com/api/orders/${orderID}/pay`,
         paymentResult,
         config
       );
@@ -149,7 +149,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/myorders`, config);
+    const { data } = await axios.get(`https://plantae-backend.herokuapp.com/api/orders/myorders`, config);
     dispatch({
       type: OrderActionTypes.ORDER_LIST_MY_SUCCESS,
       payload: data,
@@ -181,7 +181,7 @@ export const listOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders`, config);
+    const { data } = await axios.get(`https://plantae-backend.herokuapp.com/api/orders`, config);
     dispatch({
       type: OrderActionTypes.ORDER_LIST_SUCCESS,
       payload: data,
@@ -214,7 +214,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `/api/orders/${order._id}/deliver`,
+      `https://plantae-backend.herokuapp.com/api/orders/${order._id}/deliver`,
       {},
       config
     );
