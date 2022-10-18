@@ -2,7 +2,7 @@ import CartActionTypes from './cart.types';
 import axios from 'axios';
 
 export const addItemToCart = (id, quantity) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/products/${id}`);
+  const { data } = await axios.get(`https://plantae-backend.herokuapp.com/api/products/${id}`);
   dispatch({
     type: CartActionTypes.ADD_ITEM_TO_CART,
     payload: {
