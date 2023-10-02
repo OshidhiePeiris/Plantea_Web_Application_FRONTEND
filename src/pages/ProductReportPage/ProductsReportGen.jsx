@@ -46,7 +46,7 @@ const ProductsReportGen = () => {
         </thead>
         <tbody>
             {products.map((product)=>(
-                <tr>
+                <tr key={product._id.id}>
                     <td>{product._id.id}</td>
                     <td>{product._id.name}</td>
                     <td>{product.total}</td>
