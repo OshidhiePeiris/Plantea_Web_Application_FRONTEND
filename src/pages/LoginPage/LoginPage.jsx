@@ -6,7 +6,7 @@ import ErrorMessage from '../../components/errormessage/errormessage';
 import Loader from '../../components/loader/Loader';
 import { login } from '../../redux/reducers/user/user.actions';
 import Login from './login.jpg';
-
+import { googleoAuth } from '../../redux/reducers/googleauth/googleauth.actions';
 import VisibilityOffRoundedIcon from '@material-ui/icons/VisibilityOffRounded';
 import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
 
@@ -44,6 +44,16 @@ const LoginPage = ({ location, history }) => {
     setType('password');
   };
 
+  function loginWithGoogle(){
+   
+    // axios.get('http://localhost:5000/auth/google').then(()=>{
+    //   console.log("Success")
+    // }).catch((err)=>{
+    //   console.log("Not success")
+    // })
+    dispatch(googleoAuth());
+  
+ }
   return (
     <Container>
       <Row className='justify-content-md-center'>
@@ -116,6 +126,18 @@ const LoginPage = ({ location, history }) => {
               >
                 Register
               </Link>
+            </Col>
+            <Col>
+              {/* New Customer ?{' '} */}
+              <Button
+                onClick={loginWithGoogle}
+              >
+                Login With Google
+              </Button>
+              {/* <div>
+     
+      <a href="http://localhost:5000/auth/google">Login with Google</a>
+    </div> */}
             </Col>
           </Row>
         </Col>

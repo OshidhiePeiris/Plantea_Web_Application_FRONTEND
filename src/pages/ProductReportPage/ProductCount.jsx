@@ -25,12 +25,17 @@ const ProductCount = () => {
                 <h5 class="card-title">Number of Products</h5>
 
                 <div>
-
+{/* 
                     {products.map(data => {
                         return (
                             <h1 className='card-text'>{data.total}</h1>
                         )
-                    })}
+                    })} */}
+                    {products.map((data, index) => {
+        return (
+            <h1 className='card-text' key={index}>{data.total}</h1>
+        );
+    })}
                 </div>
             </div>
         </div>

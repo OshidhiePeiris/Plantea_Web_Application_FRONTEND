@@ -1,0 +1,7 @@
+const GoogleUathActionTypes = {
+    GOOGLE_AUTH_REQUEST: 'GOOGLE_AUTH_REQUEST',
+    GOOGLE_AUTH_SUCCESS: 'GOOGLE_AUTH_SUCCESS',
+    GOOGLE_AUTH_FAILURE: 'GOOGLE_AUTH_FAILURE',
+};
+
+export default GoogleUathActionTypes;
