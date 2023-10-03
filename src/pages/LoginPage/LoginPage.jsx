@@ -9,12 +9,14 @@ import Login from './login.jpg';
 import { googleoAuth } from '../../redux/reducers/googleauth/googleauth.actions';
 import VisibilityOffRoundedIcon from '@material-ui/icons/VisibilityOffRounded';
 import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
+import axios from 'axios';
 
 const LoginPage = ({ location, history }) => {
   const [type, setType] = useState('password');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const [loginsucess,setLoginSuccess]=useState(false)
   const userLogin = useSelector((state) => state.userLogin);
 
   const { loading, error, userInfo } = userLogin;
@@ -54,6 +56,29 @@ const LoginPage = ({ location, history }) => {
     dispatch(googleoAuth());
   
  }
+//  const handleGoogleLogin = async () => {
+//   try {
+//     // Perform the Google OAuth login (implement this)
+//     const oauthToken = await axios.get('http://localhost:5000/auth/google')
+
+//     // Check if the login was successful based on the OAuth token
+//     if (oauthToken) {
+//       // Set login success to true
+//       setLoginSuccess(true);
+
+//       // Redirect to the "products" page on successful login
+//       history.push('/products/:id');
+//     } else {
+//       // Handle login failure
+//       console.error('Google OAuth login failed');
+//       // Display an error message or take appropriate action
+//     }
+//   } catch (error) {
+//     // Handle other errors, e.g., network issues
+//     console.error('Login error:', error);
+//     // Display an error message or take appropriate action
+//   }
+// };
   return (
     <Container>
       <Row className='justify-content-md-center'>
@@ -130,7 +155,10 @@ const LoginPage = ({ location, history }) => {
             <Col>
               {/* New Customer ?{' '} */}
               <Button
-                onClick={loginWithGoogle}
+                onClick={() => {
+          window.location.href = 'http://localhost:5000/auth/google';
+    
+        }}
               >
                 Login With Google
               </Button>
@@ -139,6 +167,7 @@ const LoginPage = ({ location, history }) => {
       <a href="http://localhost:5000/auth/google">Login with Google</a>
     </div> */}
             </Col>
+            
           </Row>
         </Col>
       </Row>
